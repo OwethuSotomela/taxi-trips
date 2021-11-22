@@ -13,7 +13,7 @@ create table taxi (
     foreign key (region_id) references region(id)
 );
 
-drop table if exists trip CASCADE;
+-- drop table if exists trip CASCADE;
 create table trip (
     id serial NOT NULL primary key,
     route_id int NOT null,
@@ -22,7 +22,7 @@ create table trip (
     foreign Key (taxi_id) references taxi(id)
 );
 
-drop table if exists region CASCADE;
+-- drop table if exists region CASCADE;
 create table region (
     id serial NOT NULL primary key,
     name text NOT NULL
