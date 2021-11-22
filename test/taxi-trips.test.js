@@ -28,7 +28,20 @@ describe('Taxi Trips', function () {
 
         const taxiTrips = TaxiTrips(pool);
 
-        assert.deepStrictEqual([], taxiTrips.findAllRegions());
+        assert.deepStrictEqual([
+            {
+            "id": 1,
+            "name": "Durban",
+            },
+            {
+            "id": 2,
+            "name": "Cape Town",
+            },
+            {
+            "id": 3,
+            "name": "Gauteng",
+            }]
+      , await taxiTrips.findAllRegions());
 
     });
 

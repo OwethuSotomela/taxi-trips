@@ -5,7 +5,9 @@ module.exports = function TaxiTrips(pool) {
     }
 
     async function findAllRegions() {
-
+        var getRegion = await pool.query(`SELECT * FROM region`)
+        // console.log(getRegion.rows)
+        return getRegion.rows
     }
 
     async function findTaxisForRegion(regionName) {
