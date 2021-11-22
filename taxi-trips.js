@@ -1,19 +1,21 @@
 module.exports = function TaxiTrips(pool) {
 
     async function totalTripCount() {
-
+        var tripMade = await pool.query(`SELECT COUNT(*) FROM trip`)
+        return tripMade.rows[0].count;
     }
 
     async function findAllRegions() {
         var getRegion = await pool.query(`SELECT * FROM region`)
-        // console.log(getRegion.rows)
         return getRegion.rows
     }
 
     async function findTaxisForRegion(regionName) {
-
+        var getRegion = await pool.query(`SELECT * FROM region where name = $1`, [regionName])
+        var getAllTaxis = await pool.query(`SELECT * from taxi where region_id = ${getRegion.rows[0].id}`)
+        return getAllTaxis.rows;
     }
-
+    
     async function findTripsByRegNumber(regNumber) {
 
     }

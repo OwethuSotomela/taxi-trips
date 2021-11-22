@@ -3,7 +3,7 @@ const app = express();
 const taxiRoutes = require('./taxi-trips');
 const { Pool } = require('pg');
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://codex:codex123@localhost:5432/taxiTrips';
+const connectionString = process.env.DATABASE_URL || 'postgresql://localhost:5432/travis_ci_test';
 
 const pool = new Pool({
     connectionString: connectionString,
