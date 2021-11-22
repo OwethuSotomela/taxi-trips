@@ -1,4 +1,4 @@
-module.exports = function TaxiTrips() {
+module.exports = function TaxiTrips(pool) {
 
     async function totalTripCount() {
 
