@@ -18,7 +18,7 @@ create table trip (
     id serial NOT NULL primary key,
     route_id int NOT null,
     taxi_id int NOT NULL,
-    foreign key (route_id) references route(id),
+    foreign key (route_id) references route(id)
     foreign Key (taxi_id) references taxi(id)
 );
 
