@@ -17,6 +17,9 @@ module.exports = function TaxiTrips(pool) {
     }
     
     async function findTripsByRegNumber(regNumber) {
+        var getRegNumber = await pool.query(`SELECT * FROM taxi WHERE regNumber = $1`, [regNumber])
+        var getTripsByRegNumber = await pool.query(`SELECT * FROM trip WHERE taxi_id = $1`, [getRegNumber.rows[0].id])
+        return getTripsByRegNumber.rows;
 
     }
 
