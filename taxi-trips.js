@@ -15,15 +15,19 @@ module.exports = function TaxiTrips(pool) {
         var getAllTaxis = await pool.query(`SELECT * from taxi where region_id = ${getRegion.rows[0].id}`)
         return getAllTaxis.rows;
     }
-    
+
     async function findTripsByRegNumber(regNumber) {
         var getRegNumber = await pool.query(`SELECT * FROM taxi WHERE regNumber = $1`, [regNumber])
         var getTripsByRegNumber = await pool.query(`SELECT * FROM trip WHERE taxi_id = $1`, [getRegNumber.rows[0].id])
         return getTripsByRegNumber.rows;
-
     }
 
     async function findTripsByRegion(regionName) {
+        var getRegion = pool.query(`SELECT * FROM region WHERE name = $1`, [regionName])
+        var getTripsByRegion = pool.query(`SELECT * FROM trip WHERE route_id = $1`, [getRegion.rows[0].id])
+        console.log(getRegion.rows[0].id);
+        console.log(getTripsByRegion.rows[0].id)
+        return getTripsByRegion.rows;
 
     }
 
@@ -36,7 +40,13 @@ module.exports = function TaxiTrips(pool) {
     }
 
     async function findTotalIncome() {
-
+        var getTrips = await pool.query(`SELECT * FROM trip`)
+        var totalPrice = 0
+        for (const element of getTrips.rows) {
+            var getFare = await pool.query(`SELECT fare FROM route WHERE id = $1`, [element.route_id])
+            totalPrice += parseFloat(getFare.rows[0].fare)
+        }
+        return totalPrice;
     }
 
     async function findTotalIncomeByRegion() {
