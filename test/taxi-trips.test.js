@@ -107,19 +107,18 @@ describe('Taxi Trips', function () {
 
     //     const taxiTrips = TaxiTrips(pool);
 
-    //     assert.deepStrictEqual([9], await taxiTrips.findTripsByRegion('Cape Town').length);
-        // assert.deepStrictEqual([], await taxiTrips.findTripsByRegion('Gauteng').length);
-        // assert.deepStrictEqual([], await taxiTrips.findTripsByRegion('Gauteng').length);
+    //     assert.deepStrictEqual([], await taxiTrips.findTripsByRegion('Cape Town').length);
+    //     assert.deepStrictEqual([], await taxiTrips.findTripsByRegion('Gauteng').length);
+    //     assert.deepStrictEqual([], await taxiTrips.findTripsByRegion('Gauteng').length);
 
     // });
 
-    // it('find the total income for a given reg number', async function () {
+    it('find the total income for a given reg number', async function () {
 
-    //     const taxiTrips = TaxiTrips(pool);
-    //     assert.deepStrictEqual(0, await taxiTrips.findIncomeByRegNumber('ND 908 887').length);
-    //     assert.deepStrictEqual(0, await taxiTrips.findIncomeByRegNumber('***').length);
-
-    // });
+        const taxiTrips = TaxiTrips(pool);
+        assert.deepStrictEqual(55, await taxiTrips.findIncomeByRegNumber('ND 908 887'));
+        assert.deepStrictEqual(45, await taxiTrips.findIncomeByRegNumber('ND 765 564'));
+    });
 
     // it('find the total income for each taxi', async function () {
 
