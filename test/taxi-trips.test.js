@@ -130,7 +130,7 @@ describe('Taxi Trips', function () {
 
     it('find the total income for all the taxis', async function () {
         const taxiTrips = TaxiTrips(pool);
-        assert.deepStrictEqual(155, await taxiTrips.findTotalIncome('ND 708 981'));
+        assert.deepStrictEqual(155, await taxiTrips.findTotalIncome());
     });
 
 
