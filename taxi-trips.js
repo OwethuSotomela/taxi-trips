@@ -42,7 +42,21 @@ module.exports = function TaxiTrips(pool) {
     }
 
     async function findTotalIncomePerTaxi() {
-
+        var getTrips = await pool.query(`SELECT * FROM trip`)
+        var taxiAmount = await pool.query(`SELECT regnumber, id FROM taxi`)
+        taxiAmount.rows.forEach(element => {
+            element["price"] = 0
+        });
+        for (const element of getTrips.rows) {
+            var getFare = await pool.query(`SELECT fare FROM route WHERE id = $1`, [element.route_id])
+            taxiAmount.rows.forEach(taxi => {
+                if (taxi.id == element.taxi_id) {
+                    taxi["price"] += parseFloat(getFare.rows[0].fare)
+                }
+            });
+        }
+        console.log(taxiAmount.rows)
+        return taxiAmount.rows;
     }
 
     async function findTotalIncome() {
@@ -55,7 +69,9 @@ module.exports = function TaxiTrips(pool) {
         return totalPrice;
     }
 
-    async function findTotalIncomeByRegion() {
+    async function findTotalIncomeByRegion(regionName) {
+        var getRegion = await pool.query(`SELECT * FROM region WHERE name = $1`, [regionName])
+        console.log(getRegion.rows)
 
     }
 
